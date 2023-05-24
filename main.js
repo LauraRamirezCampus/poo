@@ -16,18 +16,66 @@ class lapiz{
      * ?se declara los atributos por defecto */
 
     constructor({color="Amarillo",tamaño="9cm",material="madera",mina="carbon"}){
-    this.color=color; 
+
     /* *
     ?se usa (this) para referirse al atributo y acceder al atributo color de la misma clase */
 
-    this.tamaño=tamaño;
-    /**se usa (this) para referirse al atributo y acceder al atributo tamaño de la misma clase */
-    this.#material=material;
-    /**se usa (this) para referirse al atributo y acceder al atributo privado material de la misma clase */
+    this.color=color;                       
+    this.tamaño=tamaño;                      
+    this.#material=material;                      
     this.#mina=mina;
-    /**se usa (this) para referirse al atributo y acceder al atributo  privado mina de la misma clase */
+                            
+    }
+
+    /**
+     * ?metodo get se utliza para llamar el atributo de la clase
+     */
+    get getMina(){
+        return this.#mina;
+    }
+    /**
+     * ?set se utliza para modificar los atibutos
+     */
+     set setMina(p1){
+         this.#mina=p1;
+     }
+
+    /**
+ * ?METODO ESTATICO:No se instancia ya que pertenece al metodo y a la instancia
+ */
+    static afilar(p1){
+        return `la mina de ${p1} ha sido afilada`;
     }
 }
 /** Se instancia la clase lapiz */
-let lapiz1= new lapiz({tamaño: "5cm"});/** Se puede cambiar el atributo*/
-console.log(lapiz1);
+let lapiz1= new lapiz({tamaño: "5cm"});
+/** Se puede cambiar el atributo*/
+let lapiz2= new lapiz({tamaño: "8cm"});
+/** Se puede crear un nuevo objeto modificar atributos*/
+
+lapiz1.setMina="Tinta"
+
+// console.log(lapiz1);
+// console.log(lapiz2);
+// console.log(lapiz.afilar(lapiz1.getMina));
+// console.log(lapiz.afilar(lapiz2.getMina));
+
+/**
+ * ?Herencia=> la clase lapizMecanico esta heredando de la clase lapiz 
+ */
+class lapizMecanico extends lapiz{
+    constructor({mina="metalica"}){
+        super({mina});
+    }
+
+    /**
+     * ?POLIMORFISMO=> Es cuando una clase derivada puede utilizar el metodo de la clase padre y modificarla
+     */
+    static afilar(p1){
+        return `la mina de ${p1} no se afila`;
+    }
+}
+let mecanico = new lapizMecanico({});
+mecanico.setMina="aluminio";
+console.log(mecanico.getMina);
+console.log(lapizMecanico.afilar(mecanico.getMina));
